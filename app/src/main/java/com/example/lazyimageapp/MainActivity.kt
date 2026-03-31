@@ -39,26 +39,49 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun LazyApp(modifier: Modifier = Modifier) {
-    LazyColumn(
-        modifier = modifier,
-            horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        val names = 2
-        items(names) { img ->
-            Text(
-                text = ("$img"),
-                modifier = Modifier
-                    .padding(3.dp)
-            )
-        }
 
-        item{
-            Text(
-                text = "END",
-                modifier = Modifier
-                    .padding(3.dp)
-            )
+    val configuration = LocalConfiguration.current
+    val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+
+    val images = listOf(
+        R.drawable.image1,
+        R.drawable.image2,
+        R.drawable.image3,
+        R.drawable.image4,
+        R.drawable.image5
+    )
+
+    if (isLandscape) {
+        LazyRow(
+            modifier = modifier,
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            items(images) { img ->
+                Image(
+                    painter = painterResource(id = img),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .size(150.dp)
+                        .padding(8.dp)
+                )
+            }
+        }
+    } else {
+        LazyColumn(
+            modifier = modifier,
+            verticalArrangement = Arrangement.spacedBy(12.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            items(images) { img ->
+                Image(
+                    painter = painterResource(id = img),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .size(150.dp)
+                        .padding(8.dp)
+                )
+            }
         }
     }
-
 }

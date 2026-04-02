@@ -21,6 +21,21 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.lazyimageapp.ui.theme.LazyImageAppTheme
 
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContent {
+            LazyImageAppTheme {
+                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                    LazyApp(modifier = Modifier.padding(innerPadding))
+                }
+            }
+        }
+    }
+}
+
+
 @Composable
 fun LazyApp(modifier: Modifier = Modifier) {
 

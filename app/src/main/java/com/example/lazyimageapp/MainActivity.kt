@@ -21,21 +21,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.lazyimageapp.ui.theme.LazyImageAppTheme
 
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            LazyImageAppTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    LazyApp(modifier = Modifier.padding(innerPadding))
-                }
-            }
-        }
-    }
-}
-
-
 @Composable
 fun LazyApp(modifier: Modifier = Modifier) {
 
@@ -43,9 +28,10 @@ fun LazyApp(modifier: Modifier = Modifier) {
 
     if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
 
-        // LANDSCAPE
+        // LANDSCAPE: scroll left → right
         LazyRow(
-            modifier = modifier,
+            modifier = modifier.fillMaxSize(),
+            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 12.dp),
             horizontalArrangement = Arrangement.spacedBy(12.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -62,9 +48,10 @@ fun LazyApp(modifier: Modifier = Modifier) {
 
     } else {
 
-        // PORTRAIT 
+        // PORTRAIT: scroll top → bottom
         LazyColumn(
-            modifier = modifier,
+            modifier = modifier.fillMaxSize(),
+            contentPadding = PaddingValues(vertical = 16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -80,6 +67,7 @@ fun LazyApp(modifier: Modifier = Modifier) {
         }
     }
 }
+
 
 
 

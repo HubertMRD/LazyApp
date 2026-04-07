@@ -27,48 +27,51 @@ fun LazyApp(modifier: Modifier = Modifier) {
     val orientation = LocalConfiguration.current.orientation
 
     if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-
-        // LANDSCAPE: scroll left → right
-        LazyRow(
-            modifier = modifier.fillMaxSize(),
-            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 12.dp),
-            horizontalArrangement = Arrangement.spacedBy(12.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            items(20) {
-                Image(
-                    painter = painterResource(id = R.drawable.image1),
-                    contentDescription = null,
-                    modifier = Modifier
-                        .size(150.dp)
-                        .padding(8.dp)
-                )
-            }
-        }
-
+        LazyLandscape(modifier)
     } else {
+        LazyPortrait(modifier)
+    }
+}
 
-        // PORTRAIT: scroll top → bottom
-        LazyColumn(
-            modifier = modifier.fillMaxSize(),
-            contentPadding = PaddingValues(vertical = 16.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            items(20) {
-                Image(
-                    painter = painterResource(id = R.drawable.image1),
-                    contentDescription = null,
-                    modifier = Modifier
-                        .size(150.dp)
-                        .padding(8.dp)
-                )
-            }
+@Composable
+fun LazyPortrait(modifier: Modifier = Modifier) {
+    LazyColumn(
+        modifier = modifier.fillMaxSize(),
+        contentPadding = PaddingValues(vertical = 16.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        items(20) {
+            Image(
+                painter = painterResource(id = R.drawable.image1),
+                contentDescription = null,
+                modifier = Modifier
+                    .size(150.dp)
+                    .padding(8.dp)
+            )
         }
     }
 }
 
-
+@Composable
+fun LazyLandscape(modifier: Modifier = Modifier) {
+    LazyRow(
+        modifier = modifier.fillMaxSize(),
+        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 12.dp),
+        horizontalArrangement = Arrangement.spacedBy(12.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        items(20) {
+            Image(
+                painter = painterResource(id = R.drawable.image1),
+                contentDescription = null,
+                modifier = Modifier
+                    .size(150.dp)
+                    .padding(8.dp)
+            )
+        }
+    }
+}
 
 
 
